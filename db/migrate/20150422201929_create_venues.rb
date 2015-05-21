@@ -4,7 +4,7 @@ class CreateVenues < ActiveRecord::Migration
       t.string :owner
       t.string :website
       t.string :address
-      t.string :city
+      t.belongs_to :city
       t.timestamps null: false
     end
   end
