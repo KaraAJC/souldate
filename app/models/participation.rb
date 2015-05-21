@@ -1,5 +1,5 @@
 class Participation < ActiveRecord::Base
-  belongs_to :participant, class_name: "User"
+  belongs_to :user
   belongs_to :event
-
+  has_many :matches
 end

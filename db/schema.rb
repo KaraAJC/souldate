@@ -11,21 +11,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412220111) do
+ActiveRecord::Schema.define(version: 20150521164946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
+  create_table "cities", force: :cascade do |t|
     t.string   "name"
-    t.string   "venue"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "venue_id"
+    t.string   "title"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.integer  "participant_id"
+    t.integer  "liked_id"
+    t.integer  "question_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.string   "tag_name",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "sentence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string   "username",   null: false
+    t.string   "username",        null: false
+    t.string   "password_digest", null: false
+    t.string   "avatar_url"
+    t.string   "gender"
+    t.string   "orientation"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "title"
+    t.string   "owner"
+    t.string   "website"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "logo"
+    t.integer  "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
